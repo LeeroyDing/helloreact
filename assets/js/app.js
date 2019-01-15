@@ -1,17 +1,43 @@
-// We need to import the CSS so that webpack will load it.
-// The MiniCssExtractPlugin is used to separate it out into
-// its own CSS file.
-import css from "../css/app.css"
-
-// webpack automatically bundles all modules in your
-// entry points. Those entry points can be configured
-// in "webpack.config.js".
-//
-// Import dependencies
-//
 import "phoenix_html"
+import React from "react"
+import ReactDOM from "react-dom"
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-// Import local files
-//
-// Local files can be imported directly using relative paths, for example:
-// import socket from "./socket"
+class HelloReact extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <Route exact path="/" component={Home}/>
+          <Route path="/login" component={Login}/>
+        </div>
+      </Router>
+    )
+  }
+}
+
+class Home extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello React!</h1>
+        <Link to="/login">Login</Link>
+      </div>
+    )
+  }
+}
+class Login extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello Boring Login Page!</h1>
+        <Link to="/">Home</Link>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <HelloReact/>,
+  document.getElementById("hello-react")
+)
